@@ -3,15 +3,14 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 
 
 class Config:
-    SECRET_KEY = os.urandom(32)
-    SQLALCHEMY_TRACK_MODIFICATIONS = False
-    MAIL_SERVER = 'smtp.yandex.ru'
-    MAIL_PORT = 465
-    MAIL_USE_SSL = True
-    MAIL_USERNAME = 'sendertestmail@yandex.ru'
-    MAIL_PASSWORD = 'mugtpwxvxixctlrp'
-    MAIL_DEFAULT_SENDER = 'sendertestmail@yandex.ru'
-    SCHEDULER_API_ENABLED = True
+    SECRET_KEY = os.getenv('SECRET_KEY')
+    SQLALCHEMY_TRACK_MODIFICATIONS = bool(os.getenv("SQLALCHEMY_TRACK_MODIFICATIONS"))
+    MAIL_SERVER = os.getenv('MAIL_SERVER')
+    MAIL_PORT = int(os.getenv("MAIL_PORT"))
+    MAIL_USE_SSL = bool(os.getenv("MAIL_USE_SSL"))
+    MAIL_USERNAME = os.getenv('MAIL_USERNAME')
+    MAIL_PASSWORD = os.getenv('MAIL_PASSWORD')
+    MAIL_DEFAULT_SENDER = os.getenv('MAIL_DEFAULT_SENDER')
 
     @staticmethod
     def init_app(app):
